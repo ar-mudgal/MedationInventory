@@ -1,5 +1,6 @@
 package com.inventory.MedationInventory.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 
 public class MeditionDto {
-    private Integer mId;
+    @JsonProperty("maId")
+    private Integer maId;
 
     @NotEmpty(message = "name can't be empty")
     private String meditionName;

@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/medition")
 public class MeditionController {
 
     @Autowired
@@ -32,9 +32,19 @@ public class MeditionController {
         return meditionService.getAll(meditionDto);
     }
 
-    @GetMapping("/Get/{meditionName}")
+    @GetMapping("/get/{meditionName}")
     public Response getByMeditionName(@PathVariable String meditionName){
         return meditionService.getByMeditionName(meditionName);
+    }
+
+    @DeleteMapping("/delete/{maId}")
+    public Response delete(@PathVariable Integer maId){
+        return meditionService.delete(maId);
+    }
+
+    @PostMapping("/update")
+        public Response updateMedition(@RequestBody MeditionDto meditionDto) throws Exception{
+        return meditionService.updateMedition(meditionDto);
     }
 
 }

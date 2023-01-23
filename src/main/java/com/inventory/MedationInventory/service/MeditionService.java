@@ -12,9 +12,13 @@ public interface MeditionService {
 
     Response addMedition(MeditionDto meditionDto);
 
-    Response getById(Integer mId);
+    Response getById(Integer maId);
 
     List<Medition> getAll(MeditionDto meditionDto);
 
     Response getByMeditionName(String meditionName);
+
+    Response delete(Integer MaId);
+
+    Response updateMedition(MeditionDto meditionDto) throws Exception;
 }

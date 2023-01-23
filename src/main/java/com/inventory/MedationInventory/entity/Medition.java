@@ -22,7 +22,7 @@ public class Medition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer mId;
+    private Integer maId;
 
     @Column(name="MEDITION_NAME")
     private String meditionName;

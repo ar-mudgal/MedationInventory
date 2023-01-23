@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface MeditionRepository extends JpaRepository<Medition,Integer> {
     Optional<Medition> findByMeditionName(String meditionName);
+
+    void deleteByMaId(Medition meditionName);
 }
