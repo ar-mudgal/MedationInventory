@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -46,5 +47,11 @@ public class MeditionController {
         public Response updateMedition(@RequestBody MeditionDto meditionDto) throws Exception{
         return meditionService.updateMedition(meditionDto);
     }
+
+    @PostMapping("/getExpDate")
+    public Response getMeditionExpiredDate(@RequestBody MeditionDto meditionDto){
+        return meditionService.getMeditionExpiredDate(meditionDto);
+    }
+
 
 }

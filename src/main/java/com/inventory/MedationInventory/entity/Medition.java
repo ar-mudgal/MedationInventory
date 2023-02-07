@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -34,10 +36,10 @@ public class Medition {
     private String discount;
 
     @Column(name="EXPIRE_DATE")
-    private String expire_date;
+    private LocalDate expireDate;
 
     @Column(name = "MFG_DATE")
-    private String mfg_date;
+    private LocalDate mfgDate;
 
     @Column(name="COMPANY_NAME")
     private String company_name;

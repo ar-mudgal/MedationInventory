@@ -9,6 +9,8 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Setter
 @Getter
@@ -27,9 +29,9 @@ public class MeditionDto {
 
     private String discount;
 
-    private String expire_date;
+    private String expireDate;
 
-    private String mfg_date;
+    private String mfgDate;
 
     private String company_name;
 
