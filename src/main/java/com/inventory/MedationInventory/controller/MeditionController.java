@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/medition")
+
 public class MeditionController {
 
     @Autowired
@@ -53,5 +53,14 @@ public class MeditionController {
         return meditionService.getMeditionExpiredDate(meditionDto);
     }
 
+    @GetMapping()
+    Response getMeditionBySaltAndBatchNo(@RequestParam(required = false) String salt,@RequestParam(required = false) String batchNo){
+        return meditionService.getMeditionBySaltAndBatchNo(salt,batchNo);
+    }
+
+    @GetMapping("/addToBeg")
+    public Response addMeditionToBeg(@RequestBody MeditionDto meditionDto){
+        return meditionService.addMeditionToBeg(meditionDto);
+    }
 
 }

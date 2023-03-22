@@ -10,4 +10,8 @@ public class DateTimeUtils {
     public static LocalDate stringToLocalDate(String date) {
         return LocalDate.parse(date, DD_MM_YYYY);
     }
+
+    public static String loaclDateToString(LocalDate date){
+        return date.toString();
+    }
 }

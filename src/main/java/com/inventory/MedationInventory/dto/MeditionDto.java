@@ -35,6 +35,12 @@ public class MeditionDto {
 
     private String company_name;
 
+    private String salt;
+
+    private String batchNo;
+
+    private Double quantity;
+
 //    private int stock;
 
 //    private boolean active;

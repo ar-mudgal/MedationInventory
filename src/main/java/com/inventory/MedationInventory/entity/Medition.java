@@ -44,6 +44,15 @@ public class Medition {
     @Column(name="COMPANY_NAME")
     private String company_name;
 
+    @Column(name="batchNo")
+    private String batchNo;
+
+    @Column(name="salt")
+    private String salt;
+
+    @Column(name= "quantity")
+    private Double quantity;
+
 //    @Column(name="stock")
 //    private int stock;
 
