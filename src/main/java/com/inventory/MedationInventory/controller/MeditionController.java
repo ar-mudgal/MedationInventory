@@ -2,6 +2,8 @@ package com.inventory.MedationInventory.controller;
 
 import com.inventory.MedationInventory.config.Response;
 import com.inventory.MedationInventory.dto.MeditionDto;
+import com.inventory.MedationInventory.dto.MeditionListDto;
+import com.inventory.MedationInventory.entity.AddBag;
 import com.inventory.MedationInventory.entity.Medition;
 import com.inventory.MedationInventory.service.MeditionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +60,13 @@ public class MeditionController {
         return meditionService.getMeditionBySaltAndBatchNo(salt,batchNo);
     }
 
-    @GetMapping("/addToBeg")
-    public Response addMeditionToBeg(@RequestBody MeditionDto meditionDto){
-        return meditionService.addMeditionToBeg(meditionDto);
-    }
+//    @GetMapping("/addToBeg")
+//    public Response addMeditionToBeg(@RequestBody AddBagDto addBagDto){
+//        return meditionService.addMeditionToBeg(addBagDto);
+//    }
 
+    @GetMapping("/addToBeg")
+    List<AddBag> addaddMeditionToBegB(@RequestBody MeditionListDto request){
+        return  meditionService.addaddMeditionToBegB(request);
+    }
 }

@@ -3,7 +3,11 @@ package com.inventory.MedationInventory.serviceImpl;
 import com.inventory.MedationInventory.config.Response;
 import com.inventory.MedationInventory.dao.MeditionDao;
 import com.inventory.MedationInventory.dto.MeditionDto;
+import com.inventory.MedationInventory.dto.MeditionListDto;
+import com.inventory.MedationInventory.dto.MeditionRequest;
+import com.inventory.MedationInventory.entity.AddBag;
 import com.inventory.MedationInventory.entity.Medition;
+import com.inventory.MedationInventory.repository.AddBagRepository;
 import com.inventory.MedationInventory.repository.MeditionRepository;
 import com.inventory.MedationInventory.service.MeditionService;
 import com.inventory.MedationInventory.utility.DateTimeUtils;
@@ -30,6 +34,9 @@ public class MeditionServiceImpl implements MeditionService {
 
     @Autowired
     MeditionDao meditionDao;
+
+    @Autowired
+    AddBagRepository addBagRepository;
 
     @Override
     public Response addMedition(MeditionDto meditionDto) {
@@ -105,13 +112,6 @@ public class MeditionServiceImpl implements MeditionService {
         return new Response("medition not found for meditionName {}", HttpStatus.BAD_REQUEST);
     }
 
-    //    @Override
-//    public Response getMeditionExpiredDate(LocalDate mfgDate, LocalDate expireDate) {
-//        if(LocalDate.now().isAfter(expireDate)){
-//            return new Response("medition is expired", expireDate,HttpStatus.OK);
-//        }
-//        return new Response("Medition expire date id: ", expireDate,HttpStatus.OK);
-    //}
     @Override
     public Response getMeditionExpiredDate(MeditionDto meditionDto) {
         Optional<Medition> meditionOptional = meditionRepository.findById(meditionDto.getMaId());
@@ -155,81 +155,39 @@ public class MeditionServiceImpl implements MeditionService {
         return new Response("NOT FOUND", HttpStatus.BAD_REQUEST);
     }
 
-//    @Override
-//    public Response addMeditionToBeg(MeditionDto meditionDto) {
-////        List<Medition> meditions = new ArrayList<>();
-//        Optional<Medition> meditionOptional = meditionRepository.findByMeditionName(meditionDto.getMeditionName());
-//        if (meditionOptional.isPresent()) {
-//            Medition medition = meditionOptional.get();
-//            meditionDto.getMeditionName();
-//            meditionDto.getPrise();
-//            meditionDto.setMeditionName(medition.getMeditionName());
-//            meditionDto.setSalt(medition.getSalt());
-//            meditionDto.setCompany_name(medition.getCompany_name());
-//            meditionDto.setMaId(medition.getMaId());
-//            meditionDto.setDiscount(medition.getDiscount());
-//            meditionDto.setBatchNo(medition.getBatchNo());
-//            meditionDto.setPrise(getMeditionPrise(meditionDto, medition));
-//            meditionDto.setExpireDate(DateTimeUtils.loaclDateToString(medition.getExpireDate()));
-//            meditionDto.setMfgDate(DateTimeUtils.loaclDateToString(medition.getMfgDate()));
-//            return new Response("SUCCESS", meditionDto, HttpStatus.OK);
-//        }
-//        return new Response("NOT SUCCESS", HttpStatus.BAD_REQUEST);
-//    }
+    @Override
+    public List<AddBag> addaddMeditionToBegB(MeditionListDto meditionListto) {
+        List<AddBag> addBags = new ArrayList<>();
+        for (MeditionRequest medition : meditionListto.getMedAndQuantityList()) {
+            AddBag addBag = new AddBag();
+            addBag.setMeditionName(medition.getMeditionName());
+            addBag.setQuantity(medition.getMeditionQuantity());
+            addBags.add(addBag);
+            addBagRepository.save(addBag);
+        }
+        return addBags;
+    }
+
+    //    get total buy medition price
+//    Long getMeditionPrise(MeditionListto meditionListto) {
 //
-//    //    get total buy medition price
-//    Double getMeditionPrise(MeditionDto meditionDto, Medition medition) {
-//        Optional<Medition> meditionOptional = meditionRepository.findByMeditionName(medition.getMeditionName());
-//        Medition medition1 = meditionOptional.get();
-//        if (medition1.getQuantity() < meditionDto.getQuantity()) {
+////        Optional<Medition> meditionOptional = meditionRepository.findByMeditionName();
+////        Medition medition1 = meditionOptional.get();
+//        if (medition1.getQuantity() < addBagDto.getQuantity()) {
 //            System.out.println("not available");
 //        }
-//        double totaltab = medition1.getQuantity()- meditionDto.getQuantity();
-//        double totalPrise = (meditionDto.getQuantity() * medition1.getPrise());
+//        double totaltab = medition1.getQuantity()- addBagDto.getQuantity();
+//        double totalPrise = (addBagDto.getQuantity() * medition1.getPrise());
 //        return totalPrise;
 //    }
 
 
-
-
-
-
-
-    @Override
-    public Response addMeditionToBeg(MeditionDto meditionDto) {
-        List<Medition> meditions = new ArrayList<>();
-        Optional<Medition> meditionOptional = meditionRepository.findByMeditionName(meditionDto.getMeditionName());
-        if (meditionOptional.isPresent()) {
-            Medition medition = meditionOptional.get();
-            meditionDto.getMeditionName();
-            meditionDto.getPrise();
-            meditionDto.setMeditionName(medition.getMeditionName());
-            meditionDto.setSalt(medition.getSalt());
-            meditionDto.setCompany_name(medition.getCompany_name());
-            meditionDto.setMaId(medition.getMaId());
-            meditionDto.setDiscount(medition.getDiscount());
-            meditionDto.setBatchNo(medition.getBatchNo());
-            meditionDto.setPrise(getMeditionPrise(meditionDto, medition));
-            meditionDto.setExpireDate(DateTimeUtils.loaclDateToString(medition.getExpireDate()));
-            meditionDto.setMfgDate(DateTimeUtils.loaclDateToString(medition.getMfgDate()));
-            return new Response("SUCCESS", meditionDto, HttpStatus.OK);
-        }
-        return new Response("NOT SUCCESS", HttpStatus.BAD_REQUEST);
-    }
-
-    //    get total buy medition price
-    Double getMeditionPrise(MeditionDto meditionDto, Medition medition) {
-        Optional<Medition> meditionOptional = meditionRepository.findByMeditionName(medition.getMeditionName());
-        Medition medition1 = meditionOptional.get();
-        if (medition1.getQuantity() < meditionDto.getQuantity()) {
-            System.out.println("not available");
-        }
-        double totaltab = medition1.getQuantity()- meditionDto.getQuantity();
-        double totalPrise = (meditionDto.getQuantity() * medition1.getPrise());
-        return totalPrise;
-    }
-
-
-
+    //    @Override
+//    public Response getMeditionExpiredDate(LocalDate mfgDate, LocalDate expireDate) {
+//        if(LocalDate.now().isAfter(expireDate)){
+//            return new Response("medition is expired", expireDate,HttpStatus.OK);
+//        }
+//        return new Response("Medition expire date id: ", expireDate,HttpStatus.OK);
+    //}
 
 }
