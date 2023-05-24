@@ -7,9 +7,12 @@ import com.inventory.MedationInventory.entity.AddBag;
 import com.inventory.MedationInventory.entity.Medition;
 import com.inventory.MedationInventory.service.MeditionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -45,14 +48,19 @@ public class MeditionController {
         return meditionService.delete(maId);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
         public Response updateMedition(@RequestBody MeditionDto meditionDto) throws Exception{
         return meditionService.updateMedition(meditionDto);
     }
 
-    @PostMapping("/getExpDate")
-    public Response getMeditionExpiredDate(@RequestBody MeditionDto meditionDto){
-        return meditionService.getMeditionExpiredDate(meditionDto);
+//    @PostMapping("/getExpDate")
+//    public Response getMeditionExpiredDate(@RequestBody MeditionDto meditionDto){
+//        return meditionService.getMeditionExpiredDate(meditionDto);
+//    }
+
+    @GetMapping("/getExpDate")
+    public Response getExpiryMedition(@RequestParam(required = false) String fromDate,  @RequestParam(required = false) String toDate){
+        return meditionService.getExpiryMedition(fromDate,toDate);
     }
 
     @GetMapping()
@@ -60,13 +68,10 @@ public class MeditionController {
         return meditionService.getMeditionBySaltAndBatchNo(salt,batchNo);
     }
 
-//    @GetMapping("/addToBeg")
-//    public Response addMeditionToBeg(@RequestBody AddBagDto addBagDto){
-//        return meditionService.addMeditionToBeg(addBagDto);
-//    }
 
     @GetMapping("/addToBeg")
-    List<AddBag> addaddMeditionToBegB(@RequestBody MeditionListDto request){
+    List<AddBag> addaddMeditionToBegB(@RequestBody MeditionListDto request) throws Exception {
         return  meditionService.addaddMeditionToBegB(request);
     }
+
 }

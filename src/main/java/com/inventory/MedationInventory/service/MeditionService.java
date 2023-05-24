@@ -6,6 +6,7 @@ import com.inventory.MedationInventory.dto.MeditionListDto;
 import com.inventory.MedationInventory.entity.AddBag;
 import com.inventory.MedationInventory.entity.Medition;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface MeditionService {
@@ -22,12 +23,12 @@ public interface MeditionService {
 
     Response updateMedition(MeditionDto meditionDto) throws Exception;
 
-    Response getMeditionExpiredDate(MeditionDto meditionDto);
-
     Response getMeditionBySaltAndBatchNo(String salt, String batchNo);
 
 //    Response addMeditionToBeg(AddBagDto addBagDto);
 
      List<AddBag> addaddMeditionToBegB(MeditionListDto meditionListto);
+//     Response addaddMeditionToBegB(MeditionListDto meditionListto);
+     Response getExpiryMedition(String fromDate, String toDate);
 
 }
