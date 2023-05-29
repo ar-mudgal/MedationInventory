@@ -11,7 +11,4 @@ public class MeditionListDto {
     private List<MeditionRequest> medAndQuantityList;
 
     private List<Map<String,Long>> medicineQuantObj;
-
-
-//    private Medition medition;
 }

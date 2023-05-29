@@ -3,10 +3,8 @@ package com.inventory.MedationInventory.service;
 import com.inventory.MedationInventory.config.Response;
 import com.inventory.MedationInventory.dto.MeditionDto;
 import com.inventory.MedationInventory.dto.MeditionListDto;
-import com.inventory.MedationInventory.entity.AddBag;
 import com.inventory.MedationInventory.entity.Medition;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface MeditionService {
@@ -25,10 +23,10 @@ public interface MeditionService {
 
     Response getMeditionBySaltAndBatchNo(String salt, String batchNo);
 
-//    Response addMeditionToBeg(AddBagDto addBagDto);
+     Response addaddMeditionToBegB(MeditionListDto meditionListto);
 
-     List<AddBag> addaddMeditionToBegB(MeditionListDto meditionListto);
-//     Response addaddMeditionToBegB(MeditionListDto meditionListto);
      Response getExpiryMedition(String fromDate, String toDate);
+
+     Response removeMeditionFromBag();
 
 }
