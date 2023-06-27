@@ -16,4 +16,8 @@ public class DateTimeUtils {
 
         return date.toString();
     }
+
+    public static LocalDate stringToLocalDateAnd(String date){
+        return LocalDate.parse(date,DateTimeFormatter.ISO_DATE_TIME);
+    }
 }
